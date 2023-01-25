@@ -1,20 +1,36 @@
-import React from "react";
-import Link from "next/link";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { setRepositories } from "../store/actions/repositoryActions";
 
-const RepositoryList = ({ repositories }) => {
+function RepositoryList() {
+  const dispatch = useDispatch();
+  const repositories = useSelector((state) => state.repositories.data);
+
+  useEffect(() => {
+    axios
+      .get("https://api.github.com/users/sonyfebrian/repos")
+      .then((response) => {
+        dispatch(setRepositories(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [dispatch]);
+
+  console.log(repositories, "cek repo");
   return (
-    <ul>
-      {repositories.map((repository) => (
-        <li key={repository.id}>
-          <Link
-            href={`/repository?owner=${repository.owner.login}&repo=${repository.name}`}
-          >
-            <a>{repository.name}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h1>My Repositories</h1>
+      <ul>
+        {repositories.map((repository) => (
+          <li key={repository.id}>
+            <a href={repository.html_url}>{repository.name}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
-};
+}
 
 export default RepositoryList;
