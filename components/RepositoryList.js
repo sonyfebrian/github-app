@@ -1,34 +1,34 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { setRepositories } from "../store/actions/repositoryActions";
+import React from "react";
+import moment from "moment";
 
-function RepositoryList() {
-  const dispatch = useDispatch();
-  const repositories = useSelector((state) => state.repositories.data);
-
-  useEffect(() => {
-    axios
-      .get("https://api.github.com/users/sonyfebrian/repos")
-      .then((response) => {
-        dispatch(setRepositories(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [dispatch]);
-
-  console.log(repositories, "cek repo");
+function RepositoryList({ name, language, updated_at, html_url, description }) {
   return (
     <div>
-      <h1>My Repositories</h1>
-      <ul>
-        {repositories.map((repository) => (
-          <li key={repository.id}>
-            <a href={repository.html_url}>{repository.name}</a>
-          </li>
-        ))}
-      </ul>
+      <div className="text-gray-900 capitalize font-bold text-2xl">{name}</div>
+      <p>
+        <a
+          href={html_url}
+          class="text-xs text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          {html_url}
+        </a>
+      </p>
+      <hr className="my-4 w-full" />
+      <p className="text-sm mt-4">Description:</p>
+      {description ? (
+        <span className="text-gray-500"> {description}</span>
+      ) : (
+        <span className="text-gray-500"> None </span>
+      )}
+      <hr className="my-4" />
+      <div className="mt-4">
+        <span className="text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-purple-500 to-yellow-500">
+          {language}
+        </span>
+        <span class="bg-purple-200 text-purple-600 py-1 px-3 mx-4 rounded-full text-xs">
+          Updated {moment(updated_at, "YYYYMMDD").fromNow()}
+        </span>
+      </div>
     </div>
   );
 }
