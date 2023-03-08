@@ -50,11 +50,11 @@ export default function Profil() {
           </div>
         </div>
       </section>
-      <div className="bg-gray-100 pt-5">
+      <div className="pt-5">
         <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-          <div className="rounded-lg md:w-2/3">
+          <div className="rounded-lg md:w-3/3">
             {_.map(repositories, (repo) => (
-              <div className=" mb-6 rounded-lg bg-white p-6 shadow-md ">
+              <div className="mb-6 rounded-lg bg-white p-6 shadow-md ">
                 <RepositoryList key={repo.id} {...repo} />
               </div>
             ))}
