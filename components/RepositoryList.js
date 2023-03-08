@@ -8,7 +8,7 @@ function RepositoryList({ name, language, updated_at, html_url, description }) {
       <p>
         <a
           href={html_url}
-          class="text-xs text-blue-600 dark:text-blue-500 hover:underline"
+          className="text-xs text-blue-600 dark:text-blue-500 hover:underline"
         >
           {html_url}
         </a>

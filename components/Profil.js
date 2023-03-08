@@ -24,10 +24,33 @@ export default function Profil() {
 
   return (
     <>
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-10 mx-auto">
+          {" "}
+          <h1 className="text-center text-2xl font-bold">
+            My Github Repository
+          </h1>
+          <div className="flex flex-col items-center text-center group  md:lg:xl:border-b  cursor-pointer">
+            <img
+              src={user.avatar_url}
+              alt="product-image"
+              className="object-cover w-40 h-40 rounded-full"
+            />
+            <p className="text-xl font-medium text-slate-700 mt-3">
+              {user.login}
+            </p>
+            <p className="mt-2 text-sm text-slate-500">
+              <a
+                href={user.html_url}
+                className="text-xs text-blue-600 dark:text-blue-500 hover:underline"
+              >
+                {user.html_url}
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
       <div className="bg-gray-100 pt-5">
-        <h1 className="mb-10 text-center text-2xl font-bold">
-          My Github Repository
-        </h1>
         <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
           <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
             <img
@@ -41,7 +64,7 @@ export default function Profil() {
               {" "}
               <a
                 href={user.html_url}
-                class="text-xs text-blue-600 dark:text-blue-500 hover:underline"
+                className="text-xs text-blue-600 dark:text-blue-500 hover:underline"
               >
                 {user.html_url}
               </a>
